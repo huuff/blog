@@ -1,6 +1,25 @@
 # An Overview of CAP Theorem's Criticism
 The CAP theorem is one of the most well-known results in distributed data systems around the world, and it's been so heavily misused and misunderstood that it has been rightly deemed as "infamous". Amazingly, but as usual in our field, people found out dozens of different ways of being wrong about the CAP theorem, so I'm compiling here some of the most intelligent critique I've found around about it.
 
+## History
+Our first stop in reviewing the actual definitions of CAP and how it stands against its criticism, should be finding out an authoritative source for it. A timeline of its development is helpful here:
+
+1. 1999: First published in the *harvest* and *yield* paper[^1], for which it's not a centerpiece, not very formally specified and present almost like a quick rule-of-thumb. 
+2. 2000: This was later presented in a well-known keynote[^2] which preserved its original spirit rather intact.
+3. 2002: CAP gets formalized, and proved, making it a theorem, by Gilbert and Lynch[^3]
+4. 2012: Eric A. Brewer, original author, comments on the conjecture himself[^4], where he contravenes some parts of its original statement.[^5]
+
+## Criticism on criticism
+See what happened there? Several iterations on the original statement makes it a hard-to-hit moving target. Most criticism relates specifically to one, but not all, of the installments of the conjecture. As usual, formalizing the original conjecture into a theorem made it's definitions stricter, partially incompatible with the original ones presented in 1999, and almost sucked out all of the fun of it. I think it's unfair to criticise the use of CAP in informal settings (i.e. in a marketing piece for a database system that claims itself to be CA) by using its formal definitions from the proof from 2002. Nevertheless, I consider all of this rumination on any given definitions both entertaining and enlightening and thus I'm just compiling it as-is here.
+
+## References
+[^1]: [Harvest, Yield, and Scalable Tolerant Systems](https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.33.411&rep=rep1&type=pdf)
+[^2]: [Towards Robust Distributed Systems](https://people.eecs.berkeley.edu/~brewer/cs262b-2004/PODC-keynote.pdf)
+[^3]: [Brewer's Conjecture and the Feasibility of Consistent, Available, Partition-Tolerant Web Services](https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.67.6951&rep=rep1&type=pdf)
+[^4]: [CAP Twelve Years Later: How the "Rules" Have Changed](https://www.infoq.com/articles/cap-twelve-years-later-how-the-rules-have-changed/)
+
+
+#### OLD STUFF, MUST REWORK IT
 ## CAP's definitions are too strict
 * Consistency in CAP terms means *linearizability*, which is actually the highest possible level of consistency. This means that any data systems with weaker consistency levels such as causal, sequential or eventual consistency are **not** consistent in CAP terms. So this forgoes of most practical real-world data systems.
 * Availability in CAP terms means that **every** non-failing node must reply with non-error responses. This, once again, forgoes many real systems like MongoDB, which, during a network partition, and to prevent ending in a split-brain situation, prevent the nodes in the nodes in the minority side of the partition from responding, even if they are non-failing.
