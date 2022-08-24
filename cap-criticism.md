@@ -22,7 +22,7 @@ However, in real systems:
 * Non-failing nodes are disallowed to respond if they are known to be unable to preserve consistency during a network partition. For example, in *quorum*-based systems, only the nodes in the majority side of the partition are allowed to respond, while non-failing nodes in the minority side are disallowed from doing so, as they might be lagging behind.
 
 * Consistency means *linearizability*, which is actually the highest possible consistency level. Most real-world systems forfeit linearizability in favor of some weaker consistency level to decrease latency. This means that any *eventually consistent* system, is, by definition, not CAP-consistent.
-* Availability means that every non-failing node must return a valid response. Usually, real-world systems work on a *quorum*-based mode during a partition, meaning that only nodes in the majority side of the partition will continue responding. This means they are not CAP-available, since non-failing nodes 
+* Availability means that every non-failing node must return a valid response. Usually, real-world systems work on a *quorum*-based mode during a partition, so only nodes in the majority side of the partition will continue responding. This means they are not CAP-available, since non-failing nodes will not return valid responses. On the other hand, however, as long as requests get routed to the majority side, the SLA of the application is unaffected, and thus, this is still considered *highly available* in the real world.
 
 The take-away is that real-world systems are neither CAP-consistent nor CAP-available, and thus, neither CP or AP.
 
