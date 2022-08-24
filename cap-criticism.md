@@ -9,6 +9,26 @@ Our first stop in reviewing the actual definitions of CAP and how it stands agai
 3. 2002: CAP gets formalized, and proved, making it a theorem, by Gilbert and Lynch[^3]
 4. 2012: Eric A. Brewer, original author, comments on the conjecture himself[^4], where he contravenes some parts of its original statement.[^5]
 
+
+## Real systems are neither CAP-consistent nor CAP-available
+This comes down to the strict definitions of consistency and availability used to prove the CAP's theorem[^3]
+
+* Consistency means *linearizability*, which is actually the highest possible consistency level. In a linearizable distributed systems, a read always returns the latest possible write for that value, and operations are ordered according to the real wall-clock time at which they were executed. This requires expensive coordination among nodes.
+* Availability means that **every** non-failing node must return a valid response during a partition.
+
+However, in real systems:
+
+* Linearizability is forfeited in favor of some weaker consistency level that imposes less coordination overhead and leads to lower latencies. For example, *eventually consistent* systems do not always return the latest write, but they do it *eventually* given enough time. ==TODO: Note on MongoDB stale reads, use all of Jepsen analyses==
+* Non-failing nodes are disallowed to respond if they are known to be unable to preserve consistency during a network partition. For example, in *quorum*-based systems, only the nodes in the majority side of the partition are allowed to respond, while non-failing nodes in the minority side are disallowed from doing so, as they might be lagging behind.
+
+* Consistency means *linearizability*, which is actually the highest possible consistency level. Most real-world systems forfeit linearizability in favor of some weaker consistency level to decrease latency. This means that any *eventually consistent* system, is, by definition, not CAP-consistent.
+* Availability means that every non-failing node must return a valid response. Usually, real-world systems work on a *quorum*-based mode during a partition, meaning that only nodes in the majority side of the partition will continue responding. This means they are not CAP-available, since non-failing nodes 
+
+The take-away is that real-world systems are neither CAP-consistent nor CAP-available, and thus, neither CP or AP.
+
+### Proposed solutions
+CAP was originally stated along with the *Harvest and Yield*[^1] model. In this model, instead of such precise, stringent requirements, more relaxed and realistic probability-based definitions are used. ==TODO: complete this==
+
 ## Criticism on criticism
 See what happened there? Several iterations on the original statement makes it a hard-to-hit moving target. Most criticism relates specifically to one, but not all, of the installments of the conjecture. As usual, formalizing the original conjecture into a theorem made it's definitions stricter, partially incompatible with the original ones presented in 1999, and almost sucked out all of the fun of it. I think it's unfair to criticise the use of CAP in informal settings (i.e. in a marketing piece for a database system that claims itself to be CA) by using its formal definitions from the proof from 2002. Nevertheless, I consider all of this rumination on any given definitions both entertaining and enlightening and thus I'm just compiling it as-is here.
 
@@ -20,14 +40,6 @@ See what happened there? Several iterations on the original statement makes it a
 
 
 #### OLD STUFF, MUST REWORK IT
-## CAP's definitions are too strict
-* Consistency in CAP terms means *linearizability*, which is actually the highest possible level of consistency. This means that any data systems with weaker consistency levels such as causal, sequential or eventual consistency are **not** consistent in CAP terms. So this forgoes of most practical real-world data systems.
-* Availability in CAP terms means that **every** non-failing node must reply with non-error responses. This, once again, forgoes many real systems like MongoDB, which, during a network partition, and to prevent ending in a split-brain situation, prevent the nodes in the nodes in the minority side of the partition from responding, even if they are non-failing.
-
-As a consequence, most real data systems[^1] are not linearizable (for example, MongoDB allows stale-reads even with the highest consistency level[^2]), and they're not available either (as pointed out by the previous point). This means that using the strict, highly theoretical definitions in the CAP theorem for analyzing real systems means we must relax them to do so, and, at this point, we might just as well use something else.
-
-### Proposed solutions
-The *harvest and yield* model kind of relaxes the strict definitions of CAP ==TODO: Finish this section, look up the definitions in the *Database System Internals* book==
 
 ## You can't just "choose two"
 Probably the most famous oversimplification of the CAP theorem is "Consistency, Availability and Partition Tolerance, choose two". However, this presents a number of inconveniences:
