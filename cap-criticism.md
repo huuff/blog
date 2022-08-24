@@ -29,6 +29,14 @@ The take-away is that real-world systems are neither CAP-consistent nor CAP-avai
 ### Proposed solutions
 CAP was originally stated along with the *Harvest and Yield*[^1] model. In this model, instead of such precise, stringent requirements, more relaxed and realistic probability-based definitions are used. ==TODO: complete this==
 
+## It only models a very specific failure scenario
+More specifically, there are many real-world failure scenarios not covered by it,
+
+* The CAP theorem is not concerned with failed nodes[^5]
+
+### Proposed solutions
+==TODO: Take a note on PACELC as a solution to model the tradeoffs during normal operation==
+
 ## Criticism on criticism
 See what happened there? Several iterations on the original statement makes it a hard-to-hit moving target. Most criticism relates specifically to one, but not all, of the installments of the conjecture. As usual, formalizing the original conjecture into a theorem made it's definitions stricter, partially incompatible with the original ones presented in 1999, and almost sucked out all of the fun of it. I think it's unfair to criticise the use of CAP in informal settings (i.e. in a marketing piece for a database system that claims itself to be CA) by using its formal definitions from the proof from 2002. Nevertheless, I consider all of this rumination on any given definitions both entertaining and enlightening and thus I'm just compiling it as-is here.
 
@@ -37,6 +45,7 @@ See what happened there? Several iterations on the original statement makes it a
 [^2]: [Towards Robust Distributed Systems](https://people.eecs.berkeley.edu/~brewer/cs262b-2004/PODC-keynote.pdf)
 [^3]: [Brewer's Conjecture and the Feasibility of Consistent, Available, Partition-Tolerant Web Services](https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.67.6951&rep=rep1&type=pdf)
 [^4]: [CAP Twelve Years Later: How the "Rules" Have Changed](https://www.infoq.com/articles/cap-twelve-years-later-how-the-rules-have-changed/)
+[^5]: [Don't use the CAP theorem for node failures](http://blog.thislongrun.com/2015/03/dead-nodes-dont-bite.html)
 
 
 #### OLD STUFF, MUST REWORK IT
@@ -57,9 +66,6 @@ As you can see, this is a binary choice and there is no way out of it. You might
 * If you claim that your data system is "not partition tolerance", what does this mean? Likely, that in the even of a partition (even in the single-node case), your system is unreachable and no longer serving any requests. But that's just sacrificing availability for consistency[^5]!
 
 See? There's no way out of it
-
-## It only models one kind of fault
-==TODO: Write this section, make a note on PACELC as a solution. I've found some good texts on this, but I don't remember where==
 
 [^1]: [Please stop calling databases CP or AP](https://martin.kleppmann.com/2015/05/11/please-stop-calling-databases-cp-or-ap.html)
 [^2]: [Jepsen: MongoDB stale reads](https://aphyr.com/posts/322-call-me-maybe-mongodb-stale-reads)
