@@ -29,6 +29,13 @@ The take-away is that real-world systems are neither CAP-consistent nor CAP-avai
 ### Proposed solutions
 CAP was originally stated along with the *Harvest and Yield*[^1] model. In this model, instead of such precise, stringent requirements, more relaxed and realistic probability-based definitions are used. ==TODO: complete this==
 
+## Tradeoff confusion
+CAP seems to make people think that choosing between consistency and availability is a binary choice, and that increasing one inherently decreases the other. As we saw in the previous point, the CAP theorem's proof concerns itself with a very specific situation, and almost all others fall out of its domain, so the tradeoff in real-world systems is not so black and white. But also, there are some subtler points:
+
+* AP systems are much harder to pull off than CP systems. This is immediately obvious by realizing that the trivial system that ignores all requests is considered CP in the proof[^3]. But also considering that allowing *all nodes* to be available during a partition requires us to implement some conflict resolution mechanism for when the partition heals[^4], a field with a lot of complexity on its own. Preserving consistency during a partition in an already consistent system is not so hard: we can just failover to the majority side of the partition.
+
+==TODO: finish this==
+
 ## It only models a very specific failure scenario
 More specifically, there are many real-world failure scenarios not covered by it,
 
