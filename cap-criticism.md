@@ -60,7 +60,7 @@ In the original formulation of CAP, the famous adage was *Consistency, Availabil
 There's a lot of discussion on this:
 
 * If you take Eric Brewer as an authoritative source on this, in the original formulation[^1] and the subsequent keynote[^2] CA given as a possibility, but he later[^3] rejected the idea twelve years later[^4].
-* Partitions happen whether your system handles them or not[^6]. In the extreme case, even a single-node system can be partitioned from a client running in the same computer (e.g. the socket is closed).
+* Partitions happen whether your system handles them or not[^6]. In the extreme case, even a single-node system can be partitioned from a client running in the same computer (e.g. the socket is closed). (**UPDATE**: this might not be true, as the *harvest and yield* paper[^1] mentions that a CA system is intolerant to *network partitions among server peers*, if there are no server peers, then the system trivially fulfills this requirement. I'm leaving this one around anyway because I want to investigate it further)
 * The theorem's proof specifically concerns itself with a binary choice during a network partition: either a partitioned node accepts a message (choose availability) or rejects it (choose consistency). There is no third option.[^7]
 * Considering that the proof accepts the trivial system that rejects all messages a CP system[^3], this means that even a single-node system that rejects all requests is a CP system, and thus forfeits availability.
 
