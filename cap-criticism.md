@@ -57,7 +57,7 @@ There's a lot of discussion on this:
 * Considering that the proof accepts the trivial system that rejects all messages a CP system[^3], this means that even a single-node system that rejects all requests is a CP system, and thus forfeits availability.
 
 ### Proposed solutions
-Considering CA as a different type of choice from CP or AP[^8]. Specifically considering it as opting out of CAP and considering a CA system as one whose behavior is undefined during a partition. This is a weak solution for me, since partitions will still happen[^6], and knowing the system is unable to decide what'll happen on them is not at all reassuring, and also considering that this might be missleading, since the system might not be consistent nor available during a partition, as it's undefined. This, however, is a pragmatic definition since it's likely what most systems that have been historically claimed to be CA meant.
+Considering CA as a different type of choice from CP or AP[^8][^9]. Specifically considering it as opting out of CAP and considering a CA system as one whose behavior is undefined during a partition. This is a weak solution for me, since partitions will still happen[^6], and knowing the system is unable to decide what'll happen on them is not at all reassuring, and also considering that this might be missleading, since the system might not be consistent nor available during a partition, as it's undefined. This, however, is a pragmatic definition since it's likely what most systems that have been historically claimed to be CA meant.
 
 ## It only models a very specific failure scenario
 More specifically, there are many real-world failure scenarios not covered by it,
@@ -79,3 +79,4 @@ See what happened there? Several iterations on the original statement makes it a
 [^6]: [The network is reliable](https://aphyr.com/posts/288-the-network-is-reliable)
 [^7]: [You Can't Sacrifice Partition Tolerance](https://codahale.com/you-cant-sacrifice-partition-tolerance/)
 [^8]: [The unclear CP vs. CA case in CAP](http://blog.thislongrun.com/2015/04/the-unclear-cp-vs-ca-case-in-cap.html)
+[^9]: [You Do It Too: Forfeiting Network Partition Tolerance in Distributed Systems](http://blog.thislongrun.com/2015/07/Forfeit-Partition-Tolerance-Distributed-System-CAP-Theorem.html)
