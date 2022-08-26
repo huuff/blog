@@ -43,8 +43,11 @@ CAP seems to make people think that choosing between consistency and availabilit
 * AP systems are much harder to pull off than CP systems. This is immediately obvious by realizing that the trivial system that ignores all requests is considered CP in the proof[^3]. But also considering that allowing *all nodes* to be available during a partition requires us to implement some conflict resolution mechanism for when the partition heals[^4], a field with a lot of complexity on its own. Preserving consistency during a partition in an already consistent system is not so hard: we can just failover to the majority side of the partition.
 
 ==TODO: finish this==
+
 ### Proposed solutions
 ==TODO: Mention PACELC and Harvest and Yield==
+
+* Nicolas Liochon proves in a blog post[^10] that choosing between C and A (in CAP terms) has some value when considering real-time (i.e. time-bound) constraints.
 
 ## Can you choose CA?
 In the original formulation of CAP, the famous adage was *Consistency, Availability, and Partition Tolerance. Choose two*. Well then, can you choose consistency and availability (CA), having a perfectly linearizable and available system, as long as there are no partitions?
@@ -80,3 +83,4 @@ See what happened there? Several iterations on the original statement makes it a
 [^7]: [You Can't Sacrifice Partition Tolerance](https://codahale.com/you-cant-sacrifice-partition-tolerance/)
 [^8]: [The unclear CP vs. CA case in CAP](http://blog.thislongrun.com/2015/04/the-unclear-cp-vs-ca-case-in-cap.html)
 [^9]: [You Do It Too: Forfeiting Network Partition Tolerance in Distributed Systems](http://blog.thislongrun.com/2015/07/Forfeit-Partition-Tolerance-Distributed-System-CAP-Theorem.html)
+[^10]: [If CAP were real-time: adding timing requirements to the definition of availability](http://blog.thislongrun.com/2015/06/real-time-CAP-theorem.html)
