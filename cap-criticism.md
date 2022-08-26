@@ -35,7 +35,12 @@ Therefore, in real-world systems:
 The take-away is that real-world systems are neither CAP-consistent nor CAP-available, and thus, neither CP or AP.
 
 ### Proposed solutions
-CAP was originally stated along with the *Harvest and Yield*[^1] model. In this model, instead of such precise, stringent requirements, more relaxed and realistic probability-based definitions are used. ==TODO: complete this==
+CAP was originally stated along with the *Harvest and Yield*[^1] model. In this model, instead of such precise, stringent requirements, more relaxed and realistic probability-based definitions are used:
+
+* *Yield* is the probability of completing a request.
+* *Harvest* is the fraction of data reflected in the response, i.e. the completeness of the answer to the query.
+
+As exemplified in the paper, this removes the strict choice between consistency and availability: some systems might decrease *harvest* to keep a high *yield* during a fault, and viceversa. This is for example seen in partitioned (i.e. sharded) systems, where the failure of a shard does not prevent a request for completing, instead, the response just lacks the data in that shard (trading *harvest* for *yield*)
 
 ## Tradeoff confusion
 CAP seems to make people think that choosing between consistency and availability is a binary choice, and that increasing one inherently decreases the other. As we saw in the previous point, the CAP theorem's proof concerns itself with a very specific situation, and almost all others fall out of its domain, so the tradeoff in real-world systems is not so black and white. But also, there are some subtler points:
