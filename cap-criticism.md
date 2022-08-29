@@ -50,9 +50,9 @@ CAP seems to make people think that choosing between consistency and availabilit
 * Moreover, and as yet another follow-up to the previous point, sacrificing consistency in real-world systems is not generally done to increase availability (as the "choose two" adage might imply), but to decrease latency[^11]. The tradeoff between consistency and latency is usually much more notable in these systems, as achieving higher consistency requires more messages and thus more round-trips to the database (p.e. read/write concerns in MongoDB). Meanwhile, as illustrated previously, real-world high-availability is much easier to retain that CAP-availability.
 
 ### Proposed solutions
-==TODO: Mention PACELC and Harvest and Yield==
+Daniel Abadi's PACELC model[^12] takes this latest point into consideration, resulting in a model that's more realistic according to the tradeoff decisions donde in real systems. It goes like this:
 
-* Nicolas Liochon proves in a blog post[^10] that choosing between C and A (in CAP terms) has some value when considering real-time (i.e. time-bound) constraints.
+> During a **P**artition, you have to choose between **A**vailability and **C**onsistency, **E**lse, choose between **L**atency and **C**onsistency.
 
 ## Can you choose CA?
 In the original formulation of CAP, the famous adage was *Consistency, Availability, and Partition Tolerance. Choose two*. Well then, can you choose consistency and availability (CA), having a perfectly linearizable and available system, as long as there are no partitions?
@@ -70,10 +70,16 @@ Considering CA as a different type of choice from CP or AP[^8][^9]. Specifically
 ## It only models a very specific failure scenario
 More specifically, there are many real-world failure scenarios not covered by it,
 
-* The CAP theorem is not concerned with failed nodes[^5]
+* The CAP theorem is not concerned with failed nodes[^5].
+* Given that it is only concerned with network partitions, this means it doesn't model a lot of real-life failure scenarios such as human error, application errors, or natural disaster completely destroying a data center.[^13]
+* A usual "solution" to this is to abstract away other types of failure into network partitions. For example:
+  * A failed node is considered as being partitioned from the rest. But in the real world, there are more considerations and different solutions that fall out of the domain of CAP[^5].
+  * High-latency between some subset of nodes is considered a partition. But the proof[^3] doesn't cover this case as it's developed in an asynchronous network.
+  * A destroyed datacenter can be modeled as partitioned from the rest of the nodes. But this is an inaccurate model: the partition will never heal (unless a backup is restored in a different datacenter), choosing availability is not possible (these nodes will never respond), and choosing consistency is meaningless (even if the majority of nodes was in the other datacenter, that data is permanently lost). So our only possibility is to model nodes in the other data center as failed, which is explicitly out of CAP.
 
 ### Proposed solutions
-==TODO: Take a note on PACELC as a solution to model the tradeoffs during normal operation==
+* Nicolas Liochon proves in a blog post[^10] that choosing between C and A (in CAP terms) has some value when considering real-time (i.e. time-bound) constraints.
+* Once again, PACELC provides at least more insight into the system during a wider range of situations: most of the time the system is working correctly, and including this into our model takes us further than CAP. Dismissing the possibility of failure is dangerous though, so we have to take it into account.
 
 ## Criticism on criticism
 See what happened there? Several iterations on the original statement makes it a hard-to-hit moving target. Most criticism relates specifically to one, but not all, of the installments of the conjecture. As usual, formalizing the original conjecture into a theorem made it's definitions stricter, partially incompatible with the original ones presented in 1999, and almost sucked out all of the fun of it. I think it's unfair to criticise the use of CAP in informal settings (i.e. in a marketing piece for a database system that claims itself to be CA) by using its formal definitions from the proof from 2002. Nevertheless, I consider all of this rumination on any given definitions both entertaining and enlightening and thus I'm just compiling it as-is here.
@@ -90,3 +96,5 @@ See what happened there? Several iterations on the original statement makes it a
 [^9]: [You Do It Too: Forfeiting Network Partition Tolerance in Distributed Systems](http://blog.thislongrun.com/2015/07/Forfeit-Partition-Tolerance-Distributed-System-CAP-Theorem.html)
 [^10]: [If CAP were real-time: adding timing requirements to the definition of availability](http://blog.thislongrun.com/2015/06/real-time-CAP-theorem.html)
 [^11]: [Problems with CAP, and Yahoo's little known NoSQL system](https://dbmsmusings.blogspot.com/2010/04/problems-with-cap-and-yahoos-little.html)
+[^12]: [Consistency Tradeoffs in Modern Distributed Database System Design](https://www.cs.umd.edu/~abadi/papers/abadi-pacelc.pdf)
+[^13]: [Clarifications On The CAP Theorem And Data-Related Errors](https://www.voltactivedata.com/blog/2010/10/clarifications-cap-theorem-data-related-errors/)
