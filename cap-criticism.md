@@ -24,8 +24,8 @@ The crux of it: during a partition, you have to choose either consistency or ava
 ## Real systems are neither CAP-consistent nor CAP-available
 This comes down to the strict definitions of consistency and availability used to prove the CAP's theorem[^3]
 
-* Consistency means *linearizability*, which is actually the highest possible consistency level. But in there exist many weaker consistency levels that might be more practical in real systems.
-* Availability means that **every** non-failing node must return a valid response. This is, however, not the metric that most vendors use to define *high availability* or SLAs.
+* Consistency means *linearizability*, which is actually the highest possible consistency level. But in there exist many weaker consistency levels, and not all systems have such stringent consistency requirements.
+* Availability means that **every** non-failing node must return a valid response. However, in the real world, *high availability* refers to the ability of the system to always produce a response in all cases (i.e. at least **some** node produces a valid response).
 
 Therefore, in real-world systems:
 
@@ -46,8 +46,8 @@ As exemplified in the paper, this removes the strict choice between consistency 
 CAP seems to make people think that choosing between consistency and availability is a binary choice, and that increasing one inherently decreases the other. As we saw in the previous point, the CAP theorem's proof concerns itself with a very specific situation, and almost all others fall out of its domain, so the tradeoff in real-world systems is not so black and white. But also, there are some subtler points:
 
 * AP systems are much harder to pull off than CP systems. This is immediately obvious by realizing that the trivial system that ignores all requests is considered CP in the proof[^3]. But also considering that allowing *all nodes* to be available during a partition requires us to implement some conflict resolution mechanism for when the partition heals[^4], a field with a lot of complexity on its own. Preserving consistency during a partition in an already consistent system is not so hard: we can just failover to the majority side of the partition.
-
-==TODO: finish this==
+* The charactacterization of an AP system vs a CP one is asymmetric. A CP system sacrifices availability only during a partition. Meanwhile, and as a follow-up to the previous point, an AP system requires pretty elaborate machinery to work, and that's usually very inherent to its functioning, so usually they sacrifice consistency at **all times**, not only during a partition[^11] (e.g. eventually consistent systems)
+* Moreover, and as yet another follow-up to the previous point, sacrificing consistency in real-world systems is not generally done to increase availability (as the "choose two" adage might imply), but to decrease latency[^11]. The tradeoff between consistency and latency is usually much more notable in these systems, as achieving higher consistency requires more messages and thus more round-trips to the database (p.e. read/write concerns in MongoDB). Meanwhile, as illustrated previously, real-world high-availability is much easier to retain that CAP-availability.
 
 ### Proposed solutions
 ==TODO: Mention PACELC and Harvest and Yield==
@@ -89,3 +89,4 @@ See what happened there? Several iterations on the original statement makes it a
 [^8]: [The unclear CP vs. CA case in CAP](http://blog.thislongrun.com/2015/04/the-unclear-cp-vs-ca-case-in-cap.html)
 [^9]: [You Do It Too: Forfeiting Network Partition Tolerance in Distributed Systems](http://blog.thislongrun.com/2015/07/Forfeit-Partition-Tolerance-Distributed-System-CAP-Theorem.html)
 [^10]: [If CAP were real-time: adding timing requirements to the definition of availability](http://blog.thislongrun.com/2015/06/real-time-CAP-theorem.html)
+[^11]: [Problems with CAP, and Yahoo's little known NoSQL system](https://dbmsmusings.blogspot.com/2010/04/problems-with-cap-and-yahoos-little.html)
