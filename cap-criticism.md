@@ -54,6 +54,8 @@ Daniel Abadi's PACELC model[^12] takes this latest point into consideration, res
 
 > During a **P**artition, you have to choose between **A**vailability and **C**onsistency, **E**lse, choose between **L**atency and **C**onsistency.
 
+PACELC is not particularly formal in the referenced paper, but I think this is actually a plus for informal discussions on tradeoffs. Even though it builds on CAP, Abadi himself rejects the idea of CAP-availability (though seemingly, not CAP-consistency), and explicitly calls MongoDB a PA/EC system, even though it is not CAP-available during a partition, by arguing that a partition causes more consistency-related problems (introducing the possibility of a rollback) than availability-related ones.
+
 ## Can you choose CA?
 In the original formulation of CAP, the famous adage was *Consistency, Availability, and Partition Tolerance. Choose two*. Well then, can you choose consistency and availability (CA), having a perfectly linearizable and available system, as long as there are no partitions?
 
