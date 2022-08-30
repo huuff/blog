@@ -100,3 +100,6 @@ val margheritaHawaiian = new PizzaBuilder()
 
 ## References
 * *Clean Code*, by Robert C. Martin
+
+### Ideas
+* How the `Unit` type allows using void methods as expressions instead of only statements
