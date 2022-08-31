@@ -83,8 +83,17 @@ More specifically, there are many real-world failure scenarios not covered by it
 * Nicolas Liochon proves in a blog post[^10] that choosing between C and A (in CAP terms) has some value when considering real-time (i.e. time-bound) constraints.
 * Once again, PACELC provides at least more insight into the system during a wider range of situations: most of the time the system is working correctly, and including this into our model takes us further than CAP. Dismissing the possibility of failure is dangerous though, so we have to take it into account.
 
-## Criticism on criticism
-See what happened there? Several iterations on the original statement makes it a hard-to-hit moving target. Most criticism relates specifically to one, but not all, of the installments of the conjecture. As usual, formalizing the original conjecture into a theorem made it's definitions stricter, partially incompatible with the original ones presented in 1999, and almost sucked out all of the fun of it. I think it's unfair to criticise the use of CAP in informal settings (i.e. in a marketing piece for a database system that claims itself to be CA) by using its formal definitions from the proof from 2002. Nevertheless, I consider all of this rumination on any given definitions both entertaining and enlightening and thus I'm just compiling it as-is here.
+## Conclusion and criticism on criticism
+In the end, CAP, in its proven form, models a very specific failure scenario, sets unrealistic expectations and emphasizes the wrong kind of tradeoff. This wouldn't be bad if it wasn't exploited by database vendors' marketing until it's devoid of any of its original meaning.
+
+This, however, is just what marketing does. I think it's unfair to judge a marketing piece's interpretation of CAP because of its lack of adherence to the proved statements, especially considering that CAP is a moving target that's been through several iterations of refinement. Fortunately for us, the battle of database researchers against inflated marketing left us a lot of entertaining and enlightening critiques, so I wanted to compile them for future reference. 
+
+On the other hand, though, this further blurred the original statement of CAP and seemed like a lot of very intelligent people where arguing for very conflicting positions with very convincing arguments. Especially I was surprised, after reading several pieces arguing against the existence of a CA system, deeming it a common misconception, by the fact that it was originally mentioned by Brewer himself both in the original paper[^1] and in the later keynote[^2]. So maybe we shouldn't be so hard on marketers that claimed their system to be CA!
+
+Finally, if we want a more realistic theoretical model for discussing tradeoffs in database systems, we have a lot of resources to turn to: *harvest and yield*[^1] models certain kinds of reduced consistency and availability, PACELC[^12] greatly expands its domain by including non-failing functioning, and real-time constraints can also be introduced in the model[^10] to consider more kinds of faults.
+
+## Further reading
+I can't recommend Nicolas Liochon's series on CAP[^14] enough, which I almost entirely referenced here.
 
 ## References
 [^1]: [Harvest, Yield, and Scalable Tolerant Systems](https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.33.411&rep=rep1&type=pdf)
@@ -100,3 +109,4 @@ See what happened there? Several iterations on the original statement makes it a
 [^11]: [Problems with CAP, and Yahoo's little known NoSQL system](https://dbmsmusings.blogspot.com/2010/04/problems-with-cap-and-yahoos-little.html)
 [^12]: [Consistency Tradeoffs in Modern Distributed Database System Design](https://www.cs.umd.edu/~abadi/papers/abadi-pacelc.pdf)
 [^13]: [Clarifications On The CAP Theorem And Data-Related Errors](https://www.voltactivedata.com/blog/2010/10/clarifications-cap-theorem-data-related-errors/)
+[^14]: [The CAP theorem series](http://blog.thislongrun.com/2015/03/the-cap-theorem-series.html)
