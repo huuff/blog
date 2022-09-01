@@ -32,7 +32,7 @@ Therefore, in real-world systems:
 * Linearizability is forfeited in favor of some weaker consistency level that imposes less coordination overhead and leads to lower latencies. For example, *eventually consistent* systems do not always return the latest write, but they do it *eventually* given enough time.
 * Non-failing nodes are disallowed to respond if they are known to be unable to preserve consistency during a network partition. For example, in *quorum*-based systems, only the nodes in the majority side of the partition are allowed to respond, while non-failing nodes in the minority side are disallowed from doing so, as they might be lagging behind. However, this has no impact on the SLA of the application as it continues serving all requests.
 
-The take-away is that real-world systems are neither CAP-consistent nor CAP-available, and thus, neither CP or AP.
+The take-away is that real-world systems are neither CAP-consistent nor CAP-available, and thus, neither CP nor AP.
 
 ### Proposed solutions
 CAP was originally stated along with the *Harvest and Yield*[^1] model. In this model, instead of such precise, stringent requirements, more relaxed and realistic probability-based definitions are used:
@@ -84,7 +84,7 @@ More specifically, there are many real-world failure scenarios not covered by it
 * Once again, PACELC provides at least more insight into the system during a wider range of situations: most of the time the system is working correctly, and including this into our model takes us further than CAP. Dismissing the possibility of failure is dangerous though, so we have to take it into account.
 
 ## Conclusion and criticism on criticism
-In the end, CAP, in its proven form, models a very specific failure scenario, sets unrealistic expectations and emphasizes the wrong kind of tradeoff. This wouldn't be bad if it wasn't exploited by database vendors' marketing until it's devoid of any of its original meaning.
+In the end, CAP, in its proven form, models a very specific failure scenario, sets unrealistic expectations and emphasizes the wrong kind of tradeoff. This wouldn't be bad if it wasn't exploited by database vendors' marketing until it's devoid of its original meaning.
 
 This, however, is just what marketing does. I think it's unfair to judge a marketing piece's interpretation of CAP because of its lack of adherence to the proved statements, especially considering that CAP is a moving target that's been through several iterations of refinement. Fortunately for us, the battle of database researchers against inflated marketing left us a lot of entertaining and enlightening critiques, so I wanted to compile them for future reference. 
 
