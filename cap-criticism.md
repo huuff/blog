@@ -29,7 +29,7 @@ This comes down to the strict definitions of consistency and availability used t
 
 Therefore, in real-world systems:
 
-* Linearizability is forfeited in favor of some weaker consistency level that imposes less coordination overhead and leads to lower latencies. For example, *eventually consistent* systems do not always return the latest write, but they do it *eventually* given enough time. ==TODO: Note on MongoDB stale reads, use all of Jepsen analyses==
+* Linearizability is forfeited in favor of some weaker consistency level that imposes less coordination overhead and leads to lower latencies. For example, *eventually consistent* systems do not always return the latest write, but they do it *eventually* given enough time.
 * Non-failing nodes are disallowed to respond if they are known to be unable to preserve consistency during a network partition. For example, in *quorum*-based systems, only the nodes in the majority side of the partition are allowed to respond, while non-failing nodes in the minority side are disallowed from doing so, as they might be lagging behind. However, this has no impact on the SLA of the application as it continues serving all requests.
 
 The take-away is that real-world systems are neither CAP-consistent nor CAP-available, and thus, neither CP or AP.
