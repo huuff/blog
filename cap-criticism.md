@@ -24,7 +24,7 @@ The crux of it: during a partition, you have to choose either consistency or ava
 ## Real systems are neither CAP-consistent nor CAP-available
 This comes down to the strict definitions of consistency and availability used to prove the CAP's theorem[^3]
 
-* Consistency means *linearizability*, which is actually the highest possible consistency level. But in there exist many weaker consistency levels, and not all systems have such stringent consistency requirements.
+* Consistency means *linearizability*, which is actually one of the highest possible consistency levels. But there exist many weaker consistency levels, and not all systems have such stringent consistency requirements.
 * Availability means that **every** non-failing node must return a valid response. However, in the real world, *high availability* refers to the ability of the system to always produce a response in all cases (i.e. at least **some** node produces a valid response).
 
 Therefore, in real-world systems:
