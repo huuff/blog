@@ -1,3 +1,7 @@
+---
+date: 2022-09-24
+---
+
 # An Overview of CAP Theorem's Criticism
 The CAP theorem is one of the most well-known results in distributed data systems around the world, and it's been so heavily misused and misunderstood that it has been rightly deemed as "infamous". Amazingly, but as usual in our field, people found out dozens of different ways of being wrong about the CAP theorem, so I'm compiling here some of the most intelligent critique I've found around about it.
 
