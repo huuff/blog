@@ -3,7 +3,9 @@ date: 2023-09-09
 ---
 
 # The perfect size for REST interchanges
-I've always been an advocate for small-sized REST messages. However, recently my view is starting to drift towards larger-grained messages (at least for responses). In this post I want to explore a few of benefits and drawbacks I'm considering regarding each choice.
+The size of a REST interchange is obviously a byproduct of its needs. Our REST messages can only be as lean as the content we need to add, and no bigger than the content we can provide. It, however, has definitely the power to drive our design depending on the degree of the performance and simplicity we target for our APIs, and even the client use-cases we want to support.
+
+I've always been a supporter of smaller-sized REST messages to decrease bandwidth usage, lower the learning curve and even for enforcing data consistency (I'll expand on this later). As of lately, however, my views are starting to shift towards the fatter end of the spectrum. In this post I want to explore all considerations I've entertained to make my choice.
 
 ## Smaller payloads are simpler to understand for humans
 ### Regarding requests
