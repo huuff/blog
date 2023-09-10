@@ -29,8 +29,13 @@ I think otherwise of responses. Obviously, smaller responses are also easier to 
 
 Trying to make your responses simplers to humans is directly at tension with making them simpler for computers: you may split your resources to not include too much information, but that'll require your machine clients to go through longer transition chains to get what they want, increasing complexity and decreasing performance.
 
+Even though simpler responses may be easier to understand for humans, the effect is not as severe as for requests. People are much more capable of separating the chaff from the interesting information (we do it constantly in our daily lives!) than of producing pieces of information we may not even know what they mean.
+
+I consider this as a sort of parallel to Postel's law[^*2] : Provide as much as you can and accept as little as necessary.
+
 ## Footnotes and References
 [^*1]: The separation of application state and resource state is one of the main tenets of REST architecture. Application state refers to the current state of the client (the application) in a process through the service state (the resource state) where the server only suggest next possible states through links (hypermedia). This enables separation of concerns between client and server and also enables better server scalability.
+[^*2]: Postel's law (also called *robustness principle*) states "be conservative in what you send and liberal in what you accept". It's another of the main tenets of HTTP's success. Being liberal in what you accept permits interacting with more clients, even those that can't provide all the necessary data, or can't be updated to provide it in the most recent format. The other side of it, being conservative with responses, makes your service more predictable for clients and less likely to break them.
 
 [^1]: [The HTTP QUERY method](https://www.ietf.org/archive/id/draft-ietf-httpbis-safe-method-w-body-02.html)
 [^2]: [Architectural Styles and the Design of Network-based Software Architectures, Chapter 6: Experience and Evaluation](https://www.ics.uci.edu/~fielding/pubs/dissertation/evaluation.htm)
