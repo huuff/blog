@@ -25,10 +25,11 @@ Obviously, this shouldn't drive us towards artificially shortening requests by k
 Both of these methods might still help with the third mentioned issue: simpler URIs for `GET` requests. However, the fact that `GET` is needed for appropriate caching is a deficiency of the HTTP protocol, so they might be considered more of a workaround than an actual solution.
 
 ### Regarding responses
-I think otherwise of responses. Obviously, smaller responses are also easier to understand for humans. But at what cost? If a resource naturally includes some big fat information, would you remove it just to make it easier to parse for a human? We mustn't forget that in the end, programs are the most likely users of our API, even if they are written by humans.
+I think otherwise of responses. Obviously, smaller responses are also easier to understand for humans. But at what cost? If a resource naturally includes some big fat information, would you remove it just to make it easier to parse for a human? We mustn't forget that in the end, programs are likely the main users of our API, even if they are written by humans.
 
-Trying to make your responses simplers to human is directly at tension with making them simpler for computers: you may split your resources to not include too much information, but that'll require your machine clients to go through longer transition chains to get what they want, increasing complexity and decreasing performance.
+Trying to make your responses simplers to humans is directly at tension with making them simpler for computers: you may split your resources to not include too much information, but that'll require your machine clients to go through longer transition chains to get what they want, increasing complexity and decreasing performance.
 
+## Footnotes and References
 [^*1]: The separation of application state and resource state is one of the main tenets of REST architecture. Application state refers to the current state of the client (the application) in a process through the service state (the resource state) where the server only suggest next possible states through links (hypermedia). This enables separation of concerns between client and server and also enables better server scalability.
 
 [^1]: [The HTTP QUERY method](https://www.ietf.org/archive/id/draft-ietf-httpbis-safe-method-w-body-02.html)
